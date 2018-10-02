@@ -25,13 +25,13 @@ fun Canvas.drawITHANODE(i : Int, scale : Float, paint : Paint) {
     translate(w/2, i * gap + gap)
     for (j in 0..1) {
         val sf : Float = 1f - 2 * j
-        val sc : Float = Math.min(0.5f, Math.max(0f, scale - 0.5f)) * 2
+        val sc : Float = Math.min(0.5f, Math.max(0f, scale - j * 0.5f)) * 2
         val sc1 : Float = Math.min(0.5f, sc) * 2
         val sc2 : Float = Math.min(0.5f, Math.max(0f, sc - 0.5f)) * 2
         val deg : Float = 30f + 60f * sc1
         save()
         scale(sf, 1f)
-        translate((w/2 - gap) * (1 - sc2), 0f)
+        translate((w/2) * (1 - sc2), 0f)
         rotate(180f * (1 - sc2))
         drawArc(RectF(-r, -r, r, r), -deg, 2 * deg, true, paint)
         restore()
