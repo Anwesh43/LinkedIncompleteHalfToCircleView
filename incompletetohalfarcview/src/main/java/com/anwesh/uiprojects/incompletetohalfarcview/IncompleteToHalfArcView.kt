@@ -14,6 +14,30 @@ import android.graphics.RectF
 
 val nodes : Int = 5
 
+fun Canvas.drawITHANODE(i : Int, scale : Float, paint : Paint) {
+    val w : Float = width.toFloat()
+    val h : Float = height.toFloat()
+    val gap : Float = h / (nodes + 1)
+    val r : Float = gap / 3
+    paint.color = Color.parseColor("#283593")
+    save()
+    translate(w/2, i * gap + gap)
+    for (j in 0..1) {
+        val sf : Float = 1f - 2 * j
+        val sc : Float = Math.min(0.5f, Math.max(0f, scale - 0.5f)) * 2
+        val sc1 : Float = Math.min(0.5f, sc) * 2
+        val sc2 : Float = Math.min(0.5f, Math.max(0f, sc - 0.5f)) * 2
+        val deg : Float = 30f + 60f * sc1
+        save()
+        scale(sf, 1f)
+        translate((w/2 - gap) * (1 - sc2), 0f)
+        rotate(180f * (1 - sc2))
+        drawArc(RectF(-r, -r, r, r), -deg, 2 * deg, true, paint)
+        restore()
+    }
+    restore()
+}
+
 class IncompleteToHalfArcView(ctx : Context) : View(ctx) {
 
     private val paint : Paint = Paint(Paint.ANTI_ALIAS_FLAG)
