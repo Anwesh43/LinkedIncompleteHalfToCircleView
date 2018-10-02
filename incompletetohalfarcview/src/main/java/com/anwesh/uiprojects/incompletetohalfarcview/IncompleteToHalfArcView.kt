@@ -4,6 +4,7 @@ package com.anwesh.uiprojects.incompletetohalfarcview
  * Created by anweshmishra on 03/10/18.
  */
 
+import android.app.Activity
 import android.view.View
 import android.view.MotionEvent
 import android.content.Context
@@ -189,6 +190,14 @@ class IncompleteToHalfArcView(ctx : Context) : View(ctx) {
             itha.startUpdating {
                 animator.start()
             }
+        }
+    }
+
+    companion object {
+        fun create(activity : Activity)  : IncompleteToHalfArcView {
+            val view : IncompleteToHalfArcView = IncompleteToHalfArcView(activity)
+            activity.setContentView(view)
+            return view
         }
     }
 }
