@@ -168,4 +168,25 @@ class IncompleteToHalfArcView(ctx : Context) : View(ctx) {
             curr.startUpdating(cb)
         }
     }
+
+    data class Renderer(var view : IncompleteToHalfArcView) {
+        private val animator : Animator = Animator(view)
+        private val itha : IncompleteToHalfArc = IncompleteToHalfArc(0)
+
+        fun render(canvas : Canvas, paint : Paint) {
+            canvas.drawColor(Color.parseColor("#BDBDBD"))
+            itha.draw(canvas, paint)
+            animator.animate {
+                itha.update {i, scl ->
+                    animator.stop()
+                }
+            }
+        }
+
+        fun handleTap() {
+            itha.startUpdating {
+                animator.start()
+            }
+        }
+    }
 }
